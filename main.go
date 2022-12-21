@@ -62,6 +62,10 @@ func getBranchName(path string) (string, error) {
 			return "", err
 		}
 		bNames := strings.Split(string(gitHead), "ref: refs/heads/")
+		if len(bNames) < 2 {
+			fmt.Printf("no head tracked: %s\n", path)
+			return "", nil
+		}
 		return strings.TrimSpace(bNames[1]), nil
 	}
 	return "", fmt.Errorf("cannot find 'HEAD' file in %s", path)
@@ -104,6 +108,7 @@ func main() {
 	if err := clipboard.Init(); err != nil {
 		log.Fatal(err)
 	}
+
 	app := &cli.App{
 		Usage: "Display folders and their git branches",
 		Flags: setUpFlags(),

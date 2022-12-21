@@ -21,5 +21,6 @@ func PromptMenu(items []GitEntry) (*promptui.Select, error) {
 		Label:     "Found directories (press 'Enter' to copy directory path to clipboard)",
 		Items:     items,
 		Templates: entryTemplate,
+		Size:      10,
 	}, nil
 }
